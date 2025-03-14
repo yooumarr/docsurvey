@@ -17,7 +17,7 @@ doctor_data['Day of Week'] = pd.to_datetime(doctor_data['Login Time']).dt.dayofw
 
 # Streamlit UI Setup
 st.set_page_config(page_title="Doctor Survey", layout="wide")
-st.title("Doctor Survey WebApp")
+st.title("Doctor Survey WebPage")
 st.subheader("Select a Contact Time and Day to get a list of doctors.")
 
 # Session state to store contact time and day
