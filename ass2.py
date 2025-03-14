@@ -57,7 +57,7 @@ threshold = 0.5  # You can also allow user to adjust this
 targeted_doctors = doctor_data[doctor_data['Attendance_Probability'] >= threshold]
 
 # Show Results & Download Option
-st.subheader(f"📋 Doctors likely to attend survey around {input_hour}:00 on {input_day[1]}")
+st.subheader(f"📋 Doctors likely to attend survey around {input_time.strftime('%H:%M')} on {input_day}")
 if targeted_doctors.empty:
     st.warning("No doctors found for the selected time and day. Please try a different combination or adjust threshold.")
 else:
