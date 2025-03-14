@@ -16,9 +16,9 @@ doctor_data['Login Hour'] = pd.to_datetime(doctor_data['Login Time']).dt.hour
 doctor_data['Day of Week'] = pd.to_datetime(doctor_data['Login Time']).dt.dayofweek  # Ensuring 'Day of Week' present
 
 # Streamlit UI Setup
-st.set_page_config(page_title="Doctor Survey Targeting", layout="wide")
-st.title("Doctor Survey Targeting WebApp")
-st.subheader("Select a Contact Time and Day to filter doctors.")
+st.set_page_config(page_title="Doctor Survey", layout="wide")
+st.title("Doctor Survey WebApp")
+st.subheader("Select a Contact Time and Day to get a list of doctors.")
 
 # Session state to store contact time and day
 if 'contact_time' not in st.session_state:
@@ -73,11 +73,11 @@ threshold = 0.5  # You can also allow user to adjust this
 targeted_doctors = doctor_data[doctor_data['Attendance_Probability'] >= threshold]
 
 # Show Results & Download Option
-st.subheader(f"📋 Doctors likely to attend survey around {input_time.strftime('%H:%M')} on {input_day}")
+st.subheader(f"Doctors likely to attend survey around {input_time.strftime('%H:%M')} on {input_day}")
 if targeted_doctors.empty:
     st.warning("No doctors found for the selected time and day. Please try a different combination or adjust threshold.")
 else:
-    st.success(f"✅ Found {len(targeted_doctors)} doctors likely to attend.")
+    st.success(f"Found {len(targeted_doctors)} doctors likely to attend.")
     display_cols = ['NPI', 'State', 'Region', 'Speciality', 'Attendance_Probability']
     st.dataframe(targeted_doctors[display_cols].reset_index(drop=True))
 
