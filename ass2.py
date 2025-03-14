@@ -34,8 +34,9 @@ input_hour = input_time.hour
 
 # Day input
 input_day = st.selectbox("Select Day of Week", options=[
-    (0, "Monday"), (1, "Tuesday"), (2, "Wednesday"),
-    (3, "Thursday"), (4, "Friday"), (5, "Saturday"), (6, "Sunday")
+    "Monday", "Tuesday", "Wednesday",
+    "Thursday", "Friday", "Saturday", "Sunday"
+])
 ], format_func=lambda x: x[1])
 input_day_value = input_day[0]
 st.session_state['contact_day'] = input_day_value
