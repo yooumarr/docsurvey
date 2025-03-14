@@ -1,5 +1,3 @@
-# app.py
-
 import streamlit as st
 import pandas as pd
 import pickle
@@ -20,20 +18,17 @@ st.set_page_config(page_title="Doctor Survey", layout="wide")
 st.title("Doctor Survey WebPage")
 st.subheader("Select a Contact Time and Day to get a list of doctors.")
 
-# Session state to store contact time and day
 if 'contact_time' not in st.session_state:
     st.session_state['contact_time'] = time(8, 0)  # Default time
 
 if 'contact_day' not in st.session_state:
     st.session_state['contact_day'] = "Monday"  # Default Monday
 
-# Time input
 input_time = st.time_input("Select Contact Time", value=st.session_state['contact_time'])
 st.session_state['contact_time'] = input_time
 input_hour = input_time.hour
 input_minute = input_time.minute
 
-# Day input
 input_day = st.selectbox(
     "Select Day of Week",
     options=[
@@ -44,7 +39,6 @@ input_day = st.selectbox(
 )
 st.session_state['contact_day'] = input_day
 
-# ✅ Map day name to corresponding number for model input
 day_name_to_number = {
     "Monday": 0,
     "Tuesday": 1,
@@ -54,7 +48,7 @@ day_name_to_number = {
     "Saturday": 5,
     "Sunday": 6
 }
-input_day_value = day_name_to_number[input_day]  # Now numeric value
+input_day_value = day_name_to_number[input_day]  
 
 # Prepare Data for Prediction
 feature_cols = ['State', 'Region', 'Speciality', 'Count of Survey Attempts', 'Usage Time (mins)', 'Login Hour', 'Day of Week']
@@ -62,14 +56,13 @@ predict_data = doctor_data[feature_cols].copy()
 predict_data['Login Hour'] = input_hour  # User-selected hour
 predict_data['Day of Week'] = input_day_value  # User-selected day as number
 
-# Predict Attendance Probability
-attendance_probs = pipeline.predict_proba(predict_data)[:, 1]  # Probability of attending
+attendance_probs = pipeline.predict_proba(predict_data)[:, 1]  
 
 # Add predictions to dataset
 doctor_data['Attendance_Probability'] = attendance_probs
 
 # Filter Doctors based on Probability Threshold
-threshold = 0.5  # You can also allow user to adjust this
+threshold = 0.5 
 targeted_doctors = doctor_data[doctor_data['Attendance_Probability'] >= threshold]
 
 # Show Results & Download Option
