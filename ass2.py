@@ -33,13 +33,16 @@ st.session_state['contact_time'] = input_time
 input_hour = input_time.hour
 
 # Day input
-input_day = st.selectbox("Select Day of Week", options=[
-    "Monday", "Tuesday", "Wednesday",
-    "Thursday", "Friday", "Saturday", "Sunday"
-])
-], format_func=lambda x: x[1])
-input_day_value = input_day[0]
-st.session_state['contact_day'] = input_day_value
+input_day = st.selectbox(
+    "Select Day of Week",
+    options=[
+        "Monday", "Tuesday", "Wednesday",
+        "Thursday", "Friday", "Saturday", "Sunday"
+    ]
+)
+
+# Store in session state if needed
+st.session_state['contact_day'] = input_day
 
 # Prepare Data for Prediction
 feature_cols = ['State', 'Region', 'Speciality', 'Count of Survey Attempts', 'Usage Time (mins)', 'Login Hour', 'Day of Week']
