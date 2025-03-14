@@ -87,7 +87,7 @@ else:
     b.write(csv_data.encode())
     b.seek(0)
     st.download_button(
-        label="📥 Download CSV",
+        label="Download CSV",
         data=b,
         file_name="targeted_doctors.csv",
         mime='text/csv'
